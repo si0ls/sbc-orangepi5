@@ -7,5 +7,9 @@ vars:
   uboot_version: 2024.04-rc4
   uboot_sha256: 63e2c503d2fc2a3af8a922b69ff09520b26d7f7de9b1dd8d12f8cb185c9cce0d
   uboot_sha512: 4a546eb790d54c9aadd423888baa5c909249afeedfd71f85c8b424421c08463b0e65f3addfc2d00f4a38fb56d8051ed70c8368d49a89bd33ec69773474d4d62d
+
+  rkbin_repository: https://github.com/rockchip-linux/rkbin.git # not tagged...
+
 labels:
   org.opencontainers.image.source: https://github.com/si0ls/sbc-orangepi5
+  org.opencontainers.image.authors: Louis S.
