@@ -17,12 +17,12 @@ steps:
         export PATH=${PATH}:${TOOLCHAIN}/go/bin
 
         cd /pkg/src
-        CGO_ENABLED=0 go build -o ./<board> .
+        CGO_ENABLED=0 go build -o ./orangepi-5 .
     install:
       - |
         mkdir -p /rootfs/installers/
 
-        cp -p /pkg/src/<board> /rootfs/installers/<board>
+        cp -p /pkg/src/orangepi-5 /rootfs/installers/orangepi-5
 finalize:
   - from: /rootfs
     to: /
