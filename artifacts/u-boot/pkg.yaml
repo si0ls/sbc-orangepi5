@@ -1,8 +1,10 @@
 # References:
 #   U-Boot:
 #     - https://u-boot.readthedocs.io/en/latest
-#   Broadcom/RaspberryPi
-#     - https://github.com/u-boot/u-boot/blob/master/doc/board/broadcom/raspberrypi.rst
+#     - https://docs.u-boot.org/en/latest/board/rockchip/index.html
+#     - https://docs.u-boot.org/en/latest/board/rockchip/rockchip.html#rockchip-boards
+#   Rockchip rkbin:
+#     - https://github.com/rockchip-linux/rkbin
 name: u-boot
 variant: scratch
 shell: /toolchain/bin/bash
@@ -15,23 +17,37 @@ steps:
         sha256: "{{ .uboot_sha256 }}"
         sha512: "{{ .uboot_sha512 }}"
     env:
-      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+      SOURCE_DATE_EPOCH: "{{ .BUILD_ARG_SOURCE_DATE_EPOCH }}"
+      U_BOOT: u-boot
+      ROCKCHIP_RKBIN: rkbin
     prepare:
       - |
         mkdir -p /usr/bin \
-          && ln -sf /toolchain/bin/env /usr/bin/env
+          && ln -sf /toolchain/bin/env /usr/bin/env \
+          && ln -sf /toolchain/bin/python3 /toolchain/bin/python \
+          && pip3 install pyelftools
 
-        tar xf u-boot.tar.bz2 --strip-components=1
+        tar xf u-boot.tar.bz2 --strip-components=1 -C /u-boot
+
+        git clone {{ .rkbin_repository }} --depth 1 --branch master --single-branch ${ROCKCHIP_RKBIN}
       - |
-        make <board>_defconfig
+        cd ${U_BOOT}
+        make orangepi-5-rk3588s_defconfig
         sed -i "s/CONFIG_TOOLS_LIBCRYPTO=y/# CONFIG_TOOLS_LIBCRYPTO is not set/" .config
     build:
       - |
+        export BL31=$(pwd)/${ROCKCHIP_RKBIN}/bin/rk35/rk3588_bl31_v1.45.elf
+        export ROCKCHIP_TPL=$(pwd)/${ROCKCHIP_RKBIN}/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin
+        cd ${U_BOOT}
         make -j $(nproc) HOSTLDLIBS_mkimage="-lssl -lcrypto"
     install:
       - |
-        mkdir -p /rootfs/artifacts/arm64/u-boot/board
-        cp -v u-boot.bin /rootfs/artifacts/arm64/u-boot/board
+        cd ${U_BOOT}
+        mkdir -p /rootfs/artifacts/arm64/u-boot/orangepi-5
+        cp -v u-boot-rockchip.bin /rootfs/artifacts/arm64/u-boot/orangepi-5
+        cp -v u-boot-rockchip-spi.bin /rootfs/artifacts/arm64/u-boot/orangepi-5
 finalize:
   - from: /rootfs
     to: /rootfs
+labels:
+  org.opencontainers.image.title: u-boot

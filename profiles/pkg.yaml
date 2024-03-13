@@ -1,5 +1,5 @@
 name: profiles
 variant: scratch
 finalize:
-  - from: /pkg/orangpi-5
+  - from: /pkg/orangepi-5
     to: /rootfs/profiles

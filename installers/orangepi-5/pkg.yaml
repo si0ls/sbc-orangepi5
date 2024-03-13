@@ -1,4 +1,4 @@
-name: board
+name: orangepi-5
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
