@@ -27,7 +27,8 @@ steps:
           && ln -sf /toolchain/bin/python3 /toolchain/bin/python \
           && pip3 install pyelftools
 
-        tar xf u-boot.tar.bz2 --strip-components=1 -C /u-boot
+        mkdir -p ${U_BOOT}
+        tar xf u-boot.tar.bz2 --strip-components=1 -C ${U_BOOT}
 
         git clone {{ .rkbin_repository }} --depth 1 --branch master --single-branch ${ROCKCHIP_RKBIN}
       - |
