@@ -5,6 +5,11 @@ format: v1alpha2
 vars:
   TOOLS_IMAGE: ghcr.io/siderolabs/tools:v1.7.0-alpha.0-10-g14bf457
 
+  # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+  linux_version: 6.8
+  linux_sha256: 87eebb4c5d35b5c71e2b1dbdd106be6e6ccc0ee3c3ba0602a3fc4d9d169a6b93
+  linux_sha512: 17991b3e0cd69e910416e8b11ba48919a4ee179bf1bb8a66516897218f1bafb297754777ebee77e75f6f844a6ec79a748b10371e33ae5374a4f4accab6c6b8f7
+
   # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=u-boot/u-boot
   uboot_version: 2024.04-rc4
   uboot_sha256: 63e2c503d2fc2a3af8a922b69ff09520b26d7f7de9b1dd8d12f8cb185c9cce0d
