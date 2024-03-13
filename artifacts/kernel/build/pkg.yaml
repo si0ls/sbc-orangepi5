@@ -1,0 +1,48 @@
+name: kernel-build
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: kernel-prepare
+steps:
+  - env:
+      CARCH: arm64
+      ARCH: arm64
+    prepare:
+      - |
+        cd /src
+        cp -v /pkg/config .config
+        cp -v /pkg/certs/* certs/
+      - |
+        cd /src
+        if [[ "${ARCH}" == "arm64" ]]; then
+            for patch in $(find /pkg/patches -type f -name "*.patch"); do
+              patch -p1 < $patch || (echo "Failed to apply patch $patch" && exit 1)
+            done
+        fi
+    build:
+      - |
+        cd /src
+        python3 /toolchain/kernel-hardening-checker/bin/kernel-hardening-checker -c .config -m json | python3 /pkg/scripts/filter-hardened-check.py
+      - |
+        cd /src
+        make -j $(nproc)
+      - |
+        cd /src
+        make -j $(nproc) modules
+      - |
+        cd /src
+        if [[ "${ARCH}" == "arm64" ]]; then
+          echo "Compiling device-tree blobs"
+          make -j $(nproc) dtbs
+        fi
+finalize:
+  - from: /src
+    to: /src
+  - from: /toolchain
+    to: /toolchain
+  - from: /usr
+    to: /usr
+  - from: /bin
+    to: /bin
+  - from: /lib
+    to: /lib

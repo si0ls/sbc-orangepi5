@@ -1,0 +1,33 @@
+name: kernel
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: kernel-build
+steps:
+  - env:
+      ARCH: arm64
+    install:
+      - |
+        cd /src
+
+        mkdir -p /rootfs/boot
+        mkdir -p /rootfs/dtb
+        mkdir -p /rootfs/certs
+        cp /src/certs/signing_key.x509 /rootfs/certs/signing_key.x509
+
+        mv arch/arm64/boot/Image /rootfs/boot/vmlinuz
+        cd ./arch/arm64/boot/dts
+        for vendor in $(find . -not -path . -type d); do
+          dest="/rootfs/dtb/$vendor"
+          mkdir -v $dest
+          find ./$vendor/* -type f -name "*.dtb" -exec cp {} $dest \;
+        done
+        cd -
+
+        export KERNELRELEASE=$(cat include/config/kernel.release)
+        make -j $(nproc) modules_install DEPMOD=/toolchain/bin/depmod INSTALL_MOD_PATH=/rootfs INSTALL_MOD_STRIP=1
+        depmod -b /rootfs $KERNELRELEASE
+        unlink /rootfs/lib/modules/$KERNELRELEASE/build
+finalize:
+  - from: /rootfs
+    to: /
