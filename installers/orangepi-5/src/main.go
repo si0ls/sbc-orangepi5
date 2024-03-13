@@ -30,7 +30,7 @@ func (i *BoardInstaller) GetOptions(extra boardExtraOptions) (overlay.Options, e
 	kernelArgs = append(kernelArgs, extra.Console...)
 
 	return overlay.Options{
-		Name:       "board",
+		Name:       "orangepi-5",
 		KernelArgs: kernelArgs,
 	}, nil
 }

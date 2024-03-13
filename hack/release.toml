@@ -1,0 +1,11 @@
+# commit to be tagged for the new release
+commit = "HEAD"
+
+project_name = "sbc-orangepi5"
+github_repo = "si0ls/sbc-orangepi5"
+match_deps = "^github.com/(si0ls/[a-zA-Z0-9-]+)$"
+
+# previous = -
+# pre_release = true
+
+# [notes]

@@ -2,7 +2,7 @@
 kind: pkgfile.Build
 spec:
   targets:
-    - board
+    - orangepi-5
   extraBuildArgs:
     - PKGS_PREFIX
     - PKGS
@@ -15,5 +15,5 @@ spec:
 ---
 kind: common.Build
 spec:
-    ignoredPaths:
-      - go.work.sum
+  ignoredPaths:
+    - go.work.sum
