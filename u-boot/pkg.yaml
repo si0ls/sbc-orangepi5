@@ -5,7 +5,7 @@
 #     - https://docs.u-boot.org/en/latest/board/rockchip/rockchip.html#rockchip-boards
 #   Rockchip rkbin:
 #     - https://github.com/rockchip-linux/rkbin
-name: u-boot-rk3588
+name: u-boot-orangepi-5
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:

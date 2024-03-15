@@ -1,8 +1,8 @@
-name: kernel-rk3588-build
+name: kernel-orangepi-5-build
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
-  - stage: kernel-rk3588-prepare
+  - stage: kernel-orangepi-5-prepare
 steps:
   - env:
       CARCH: arm64

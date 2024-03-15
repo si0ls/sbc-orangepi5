@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-15T16:29:09Z by kres latest.
+# Generated on 2024-03-15T16:58:59Z by kres latest.
 
 # common variables
 
@@ -58,8 +58,8 @@ KERNEL_VERSION ?= 6.8.0-talos
 
 # targets defines all the available targets
 
-TARGETS = u-boot-rk3588
-TARGETS += kernel-rk3588
+TARGETS = u-boot-orangepi-5
+TARGETS += kernel-orangepi-5
 TARGETS += orangepi-5
 TARGETS += imager
 

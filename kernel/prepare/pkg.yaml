@@ -1,4 +1,4 @@
-name: kernel-rk3588-prepare
+name: kernel-orangepi-5-prepare
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
