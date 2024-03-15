@@ -59,11 +59,11 @@ jobs:
       - name: Push to registry
         if: github.event_name != 'pull_request'
         run: |
-          make  PUSH=true
+          make PLATFORM=linux/arm64 PUSH=true
       - name: release-notes
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          make release-notes
+          make PLATFORM=linux/arm64 release-notes
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: crazy-max/ghaction-github-release@v2
