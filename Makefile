@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-15T15:49:34Z by kres latest.
+# Generated on 2024-03-15T16:29:09Z by kres latest.
 
 # common variables
 
@@ -51,12 +51,17 @@ COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
 
 PKGS_PREFIX ?= ghcr.io/siderolabs
 PKGS ?= v1.7.0-alpha.0-33-g3aacf03
+TALOS_SRC ?= https://github.com/siderolabs/talos.git
+TALOS_VERSION ?= v1.7.0-alpha.1
+PKG_KERNEL ?= $(REGISTRY_AND_USERNAME)/kernel:$(TAG)
+KERNEL_VERSION ?= 6.8.0-talos
 
 # targets defines all the available targets
 
 TARGETS = u-boot-rk3588
 TARGETS += kernel-rk3588
 TARGETS += orangepi-5
+TARGETS += imager
 
 # help menu
 
@@ -148,6 +153,24 @@ kernel-%:
 	  $(MAKE) docker-kernel-prepare PLATFORM=$$platform TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/kernel:$(TAG)-$$arch --load"; \
 	  docker run --rm -it --entrypoint=/toolchain/bin/bash -e PATH=/toolchain/bin:/bin -w /src -v $$PWD/kernel/build/config-$$arch:/host/.hostconfig $(REGISTRY)/$(USERNAME)/kernel:$(TAG)-$$arch -c 'cp /host/.hostconfig .config && make $* && cp .config /host/.hostconfig'; \
 	done
+
+.PHONY: imager
+imager:
+	@$(MAKE) -C talos imager \
+	  TALOS_SRC=$(TALOS_SRC) \
+	  TALOS_VERSION=$(TALOS_VERSION) \
+	  PKG_KERNEL=$(PKG_KERNEL) \
+	  KERNEL_VERSION=$(KERNEL_VERSION) \
+	  PLATFORM=$(PLATFORM) \
+	  SHA=$(SHA) \
+	  TAG=$(TAG) \
+	  ABBREV_TAG=$(ABBREV_TAG) \
+	  TAG_SUFFIX=$(TAG_SUFFIX) \
+	  IMAGE_TAG=$(IMAGE_TAG) \
+	  USERNAME=$(USERNAME) \
+	  REGISTRY=$(REGISTRY) \
+	  REGISTRY_AND_USERNAME=$(REGISTRY_AND_USERNAME) \
+	  PUSH=$(PUSH)
 
 .PHONY: rekres
 rekres:
