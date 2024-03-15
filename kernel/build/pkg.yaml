@@ -1,8 +1,8 @@
-name: kernel-build
+name: kernel-rk3588-build
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
-  - stage: kernel-prepare
+  - stage: kernel-rk3588-prepare
 steps:
   - env:
       CARCH: arm64

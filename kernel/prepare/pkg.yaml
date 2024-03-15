@@ -1,4 +1,4 @@
-name: kernel-prepare
+name: kernel-rk3588-prepare
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:

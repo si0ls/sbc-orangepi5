@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-15T13:57:08Z by kres latest.
+# Generated on 2024-03-15T15:49:34Z by kres latest.
 
 # common variables
 
@@ -54,8 +54,8 @@ PKGS ?= v1.7.0-alpha.0-33-g3aacf03
 
 # targets defines all the available targets
 
-TARGETS = u-boot
-TARGETS += kernel
+TARGETS = u-boot-rk3588
+TARGETS += kernel-rk3588
 TARGETS += orangepi-5
 
 # help menu
@@ -141,6 +141,13 @@ $(TARGETS):
 .PHONY: deps.png
 deps.png:  ## Generates a dependency graph of the Pkgfile.
 	@$(BLDR) graph | dot -Tpng -o deps.png
+
+kernel-%:
+	for platform in $(shell echo $(PLATFORM) | tr "," " "); do \
+	  arch=`basename $$platform` ; \
+	  $(MAKE) docker-kernel-prepare PLATFORM=$$platform TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/kernel:$(TAG)-$$arch --load"; \
+	  docker run --rm -it --entrypoint=/toolchain/bin/bash -e PATH=/toolchain/bin:/bin -w /src -v $$PWD/kernel/build/config-$$arch:/host/.hostconfig $(REGISTRY)/$(USERNAME)/kernel:$(TAG)-$$arch -c 'cp /host/.hostconfig .config && make $* && cp .config /host/.hostconfig'; \
+	done
 
 .PHONY: rekres
 rekres:

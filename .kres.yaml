@@ -2,8 +2,8 @@
 kind: pkgfile.Build
 spec:
   targets:
-    - u-boot
-    - kernel
+    - u-boot-rk3588
+    - kernel-rk3588
     - orangepi-5
   extraBuildArgs:
     - PKGS_PREFIX
