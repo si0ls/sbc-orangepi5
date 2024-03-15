@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-15T16:58:59Z by kres latest.
+# Generated on 2024-03-15T17:57:39Z by kres latest.
 
 # common variables
 
@@ -53,7 +53,7 @@ PKGS_PREFIX ?= ghcr.io/siderolabs
 PKGS ?= v1.7.0-alpha.0-33-g3aacf03
 TALOS_SRC ?= https://github.com/siderolabs/talos.git
 TALOS_VERSION ?= v1.7.0-alpha.1
-PKG_KERNEL ?= $(REGISTRY_AND_USERNAME)/kernel:$(TAG)
+PKG_KERNEL ?= $(REGISTRY_AND_USERNAME)/kernel-orangepi-5:$(TAG)
 KERNEL_VERSION ?= 6.8.0-talos
 
 # targets defines all the available targets
