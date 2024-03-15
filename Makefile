@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-13T16:34:47Z by kres latest.
+# Generated on 2024-03-15T13:57:08Z by kres latest.
 
 # common variables
 
@@ -54,7 +54,9 @@ PKGS ?= v1.7.0-alpha.0-33-g3aacf03
 
 # targets defines all the available targets
 
-TARGETS = orangepi-5
+TARGETS = u-boot
+TARGETS += kernel
+TARGETS += orangepi-5
 
 # help menu
 

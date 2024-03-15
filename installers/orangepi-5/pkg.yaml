@@ -3,10 +3,6 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - stage: kernel
-    platform: linux/arm64
-  - stage: u-boot
-    platform: linux/arm64
   - stage: profiles
 steps:
   - env:
