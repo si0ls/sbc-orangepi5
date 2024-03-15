@@ -12,13 +12,13 @@ steps:
         cd /src
         cp -v /pkg/config .config
         cp -v /pkg/certs/* certs/
-      - |
-        cd /src
-        if [[ "${ARCH}" == "arm64" ]]; then
-            for patch in $(find /pkg/patches -type f -name "*.patch"); do
-              patch -p1 < $patch || (echo "Failed to apply patch $patch" && exit 1)
-            done
-        fi
+      #- |
+      #  cd /src
+      #  if [[ "${ARCH}" == "arm64" ]]; then
+      #      for patch in $(find /pkg/patches -type f -name "*.patch"); do
+      #        patch -p1 < $patch || (echo "Failed to apply patch $patch" && exit 1)
+      #      done
+      #  fi
     build:
       - |
         cd /src
