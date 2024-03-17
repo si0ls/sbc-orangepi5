@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-15T17:57:39Z by kres latest.
+# Generated on 2024-03-17T14:17:08Z by kres latest.
 
 # common variables
 
@@ -165,8 +165,6 @@ imager:
 	  SHA=$(SHA) \
 	  TAG=$(TAG) \
 	  ABBREV_TAG=$(ABBREV_TAG) \
-	  TAG_SUFFIX=$(TAG_SUFFIX) \
-	  IMAGE_TAG=$(IMAGE_TAG) \
 	  USERNAME=$(USERNAME) \
 	  REGISTRY=$(REGISTRY) \
 	  REGISTRY_AND_USERNAME=$(REGISTRY_AND_USERNAME) \

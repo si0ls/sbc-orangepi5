@@ -67,8 +67,6 @@ spec:
           SHA=$(SHA) \
           TAG=$(TAG) \
           ABBREV_TAG=$(ABBREV_TAG) \
-          TAG_SUFFIX=$(TAG_SUFFIX) \
-          IMAGE_TAG=$(IMAGE_TAG) \
           USERNAME=$(USERNAME) \
           REGISTRY=$(REGISTRY) \
           REGISTRY_AND_USERNAME=$(REGISTRY_AND_USERNAME) \

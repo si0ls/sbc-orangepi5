@@ -7,7 +7,7 @@ SHA ?= $(shell git describe --match=none --always --abbrev=8 --dirty)
 TAG ?= $(shell git describe --tag --always --dirty --match v[0-9]\*)
 ABBREV_TAG ?= $(shell git describe --tag --always --match v[0-9]\* --abbrev=0 )
 TAG_SUFFIX ?=
-IMAGE_TAG=$(TAG)$(TAG_SUFFIX)
+IMAGE_TAG ?= $(TAG)$(TAG_SUFFIX)
 USERNAME ?= si0ls
 REGISTRY ?= ghcr.io
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
