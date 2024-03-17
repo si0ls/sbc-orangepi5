@@ -30,7 +30,7 @@ type boardExtraOptions struct {
 func (i *BoardInstaller) GetOptions(extra boardExtraOptions) (overlay.Options, error) {
 	kernelArgs := []string{
 		"console=tty0",
-		"console=ttyS2,1500000n8",
+		"console=ttyS2:1500000",
 		"sysctl.kernel.kexec_load_disabled=1",
 		"talos.dashboard.disabled=1",
 	}
