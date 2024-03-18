@@ -1,0 +1,30 @@
+From aa187938c0b3f570a285a53e043cc239bb9203a7 Mon Sep 17 00:00:00 2001
+From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Date: Mon, 19 Feb 2024 21:53:24 +0200
+Subject: [PATCH] [WIP] dt-bindings: phy: rockchip,rk3588-hdptx-phy: Add
+ #clock-cells
+
+The PHY can be used as a clock provider on RK3588, hence add the missing
+'#clock-cells' property.
+
+Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+---
+ .../devicetree/bindings/phy/rockchip,rk3588-hdptx-phy.yaml     | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/phy/rockchip,rk3588-hdptx-phy.yaml b/Documentation/devicetree/bindings/phy/rockchip,rk3588-hdptx-phy.yaml
+index 54e822c715f3..84fe59dbcf48 100644
+--- a/Documentation/devicetree/bindings/phy/rockchip,rk3588-hdptx-phy.yaml
++++ b/Documentation/devicetree/bindings/phy/rockchip,rk3588-hdptx-phy.yaml
+@@ -27,6 +27,9 @@ properties:
+       - const: ref
+       - const: apb
+ 
++  "#clock-cells":
++    const: 0
++
+   "#phy-cells":
+     const: 0
+ 
+-- 
+GitLab
